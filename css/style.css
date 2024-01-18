@@ -48,9 +48,10 @@ h1
 .msgBox
 {
     font-size: 3rem;
-    color: black;
+    color: blue;
     text-align: center;
     margin: 2rem;
+    font-weight: bold;
 }
 
 .outBox
