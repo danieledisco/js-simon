@@ -15,11 +15,10 @@ console.log("ciao!");
 
 let numbers = [];       // L'array che conterrà i numeri mostrati in pagina
 let outString;          // La stringa letta tramite il prompt
-let outNumbers=[];      // L'array che conterrà i numeri estratti dal prompt
+let outNumbers = [];      // L'array che conterrà i numeri estratti dal prompt
 
 // Generiamo i 5 numeri casuali
-for ( let i=0; i<5; i++)
-{
+for (let i = 0; i < 5; i++) {
     const number = generateRandomNumber();
     numbers.push(number);
 }
@@ -28,9 +27,8 @@ for ( let i=0; i<5; i++)
 console.log(numbers);
 
 // Facciamoli apparire in pagina
-for ( let i=0; i<5; i++)
-{
-    const nInPage = document.getElementById('b'+i);
+for (let i = 0; i < 5; i++) {
+    const nInPage = document.getElementById('b' + i);
     nInPage.innerHTML = numbers[i]
 }
 
@@ -48,8 +46,7 @@ setTimeout(changeColorNumbers, 30000);
  * Funzione che restituisce un intero compreso tra 1 e 100
  * @returns out
  */
-function generateRandomNumber()
-{
+function generateRandomNumber() {
     const out = Math.floor(Math.random() * 100) + 1;
     return out;
 }
@@ -63,14 +60,11 @@ function generateRandomNumber()
  * nel prompt e poi, ritardandola di 10ms invoca la 
  * funzione che fa apparire il prompt
  */
-function changeColorNumbers()
-{
-    for ( let i=0; i<5; i++)
-    {
-        const nInPage = document.getElementById('b'+i);
+function changeColorNumbers() {
+    for (let i = 0; i < 5; i++) {
+        const nInPage = document.getElementById('b' + i);
         nInPage.style.color = 'aliceblue';
-        if(i == 4)
-        {
+        if (i == 4) {
             /**
              * Il prompt ha una priorità altissima e sebbene messo dopo le istruzioni procedenti
              * lui appare quando i numeri sono ancora visibili.
@@ -78,9 +72,9 @@ function changeColorNumbers()
              * ritardata di 10ms
              * Dopo appare il messaggio in pagina di inserire i 5 numeri separati dalla virgola.
              */
-            setTimeout(doPrompt,10);
+            setTimeout(doPrompt, 10);
             const msgEl = document.getElementById('mb')
-            msgEl.innerText = 'Scrivi i 5 numeri nel prompt separati dalla virgola'        
+            msgEl.innerText = 'Scrivi i 5 numeri nel prompt separati dalla virgola'
         }
     }
 
@@ -93,12 +87,10 @@ function changeColorNumbers()
  * Converte le scringhe in numeri ed invoca la funzione che 
  * verifica il numero di ingressi corretti
  */
-function doPrompt()
-{
+function doPrompt() {
     outString = prompt();
     outNumbers = outString.split(",");
-    for( let i=0; i<outNumbers.length; i++)
-    {
+    for (let i = 0; i < outNumbers.length; i++) {
         outNumbers[i] = Number(outNumbers[i]);
     }
     elaboration();
@@ -116,37 +108,29 @@ function doPrompt()
  * indovinati 1    ==>  'Hai inserito un solo numero giusto !'
  * indovinati > 1  ==>  'Hai inserito ' + indovinati +  ' numeri giusti !' 
  */
-function elaboration()
-{
-    if ( outNumbers.length != 5)
-    {
+function elaboration() {
+    if (outNumbers.length != 5) {
         const outEl = document.getElementById('ob');
-        outEl.innerText = 'Non hai inserito 5 numeri'     
+        outEl.innerText = 'Non hai inserito 5 numeri o manca la virgola'
     }
-    else
-    {
+    else {
 
         let indovinati = 0;
-        
-        for (let i=0; i<outNumbers.length; i++)
-        { 
-            if (numbers.includes(outNumbers[i]))
-            {
+
+        for (let i = 0; i < outNumbers.length; i++) {
+            if (numbers.includes(outNumbers[i])) {
                 indovinati++;
             }
         }
         const outEl = document.getElementById('ob');
-        if (indovinati == 0)
-        {
+        if (indovinati == 0) {
             outEl.innerText = 'Hai sbagliato tutti i numeri !'
         }
-        else if (indovinati == 1)
-        {
+        else if (indovinati == 1) {
             outEl.innerText = 'Hai inserito un solo numero giusto !'
         }
-        else
-        {
-            outEl.innerText = 'Hai inserito ' + indovinati +  ' numeri giusti !'     
+        else {
+            outEl.innerText = 'Hai inserito ' + indovinati + ' numeri giusti !'
         }
     }
 }
